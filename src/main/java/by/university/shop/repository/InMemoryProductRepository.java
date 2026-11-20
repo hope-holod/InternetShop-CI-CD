@@ -1,7 +1,12 @@
+
 package by.university.shop.repository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import by.university.shop.model.Product;
-import java.util.*;
 
 public class InMemoryProductRepository implements ProductRepository {
     private final Map<Integer, Product> storage = new HashMap<>();

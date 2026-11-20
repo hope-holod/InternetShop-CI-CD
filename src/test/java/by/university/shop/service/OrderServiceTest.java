@@ -69,4 +69,23 @@ class OrderServiceTest {
         assertThrows(IllegalStateException.class, () -> orderService.addItemToOrder(order, 1, 4));
         assertEquals(5, productRepository.findById(1).getStock()); // склад не тронут
     }
+
+    // Тест 4 — ошибка оплаты и журналирование ERROR
+    @Test
+    void checkoutPaymentFailure() {
+        OrderService failingOrderService = new OrderService(
+                productRepository,
+                new InMemoryOrderRepository(),
+                new FailingPaymentService(),
+                message -> sentMessages.add(message)
+        );
+
+        failingOrderService.addItemToOrder(order, 1, 1);
+
+        assertThrows(
+                IllegalStateException.class,
+                () -> failingOrderService.checkout(order)
+        );
+    }
+
 }

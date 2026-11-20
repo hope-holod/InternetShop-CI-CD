@@ -1,3 +1,4 @@
+
 package by.university.shop.app;
 
 import java.util.Properties;
@@ -24,7 +25,8 @@ public class Main {
         ProductRepository productRepo = new InMemoryProductRepository();
         OrderRepository orderRepo = new InMemoryOrderRepository();
         PaymentService paymentService = new SimplePaymentService();
-        NotificationService notifier = msg -> System.out.println("[NOTIFY] " + msg);
+        NotificationService notifier =
+                msg -> System.out.println("[NOTIFY] " + msg);
 
         OrderService orderService =
                 new OrderService(productRepo, orderRepo, paymentService, notifier);
@@ -41,7 +43,7 @@ public class Main {
         orderService.addItemToOrder(order, 2, 3);
         System.out.println("Сумма заказа: " + order.getTotal());
 
-        // Индивидуальное задание — попытка добавить больше, чем есть на складе
+        // Индивидуальное задание — проверка остатков
         try {
             orderService.addItemToOrder(order, 1, 100);
         } catch (IllegalStateException e) {
@@ -50,6 +52,8 @@ public class Main {
 
         // Оформление
         orderService.checkout(order);
-        System.out.println("Остаток ноутбуков: " + productRepo.findById(1).getStock());
+        System.out.println(
+                "Остаток ноутбуков: " + productRepo.findById(1).getStock()
+        );
     }
 }
