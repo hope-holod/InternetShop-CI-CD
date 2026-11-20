@@ -21,4 +21,24 @@ class ProductTest {
     void rejectsNegativePrice() {
         assertThrows(IllegalArgumentException.class, () -> new Product(10, "Мышь", -1.0, 3));
     }
+
+    @Test
+    void rejectsZeroQuantity() {
+        Product product = new Product(10, "Мышь", 25.0, 3);
+
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> product.decreaseStock(0)
+        );
+    }
+
+    @Test
+    void rejectsNegativeQuantity() {
+        Product product = new Product(10, "Мышь", 25.0, 3);
+
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> product.decreaseStock(-1)
+        );
+    }
 }

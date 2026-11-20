@@ -26,9 +26,18 @@ public class Product {
     public int getStock() { return stock; }
 
     public void decreaseStock(int quantity) {
-        if (quantity > stock) {
-            throw new IllegalStateException("Недостаточно товара на складе");
-        }
-        stock -= quantity;
+    if (quantity <= 0) {
+        throw new IllegalArgumentException(
+            "Количество товара должно быть положительным"
+        );
     }
+
+    if (quantity > stock) {
+        throw new IllegalStateException(
+            "Недостаточно товара на складе"
+        );
+    }
+
+    stock -= quantity;
+}
 }
