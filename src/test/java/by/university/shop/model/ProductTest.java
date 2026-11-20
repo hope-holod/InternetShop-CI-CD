@@ -27,7 +27,7 @@ class ProductTest {
         Product product = new Product(10, "Мышь", 25.0, 3);
 
         assertThrows(
-            IllegalArgumentException.class,
+            IllegalStateException.class,
             () -> product.decreaseStock(0)
         );
     }
