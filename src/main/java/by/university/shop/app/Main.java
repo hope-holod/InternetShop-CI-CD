@@ -51,9 +51,10 @@ public class Main {
         }
 
         // Оформление
-        orderService.checkout(order);
+        oderService.checkout(order);
         System.out.println(
                 "Остаток ноутбуков: " + productRepo.findById(1).getStock()
         );
     }
+    
 }
